@@ -1,36 +1,34 @@
-# =========================================================
-# ANÁLISIS DE CONFUSIÓN EPIDEMIOLÓGICA EN R
-# =========================================================
+
+ ANÁLISIS DE CONFUSIÓN EPIDEMIOLÓGICA EN R
+
 
 # OBJETIVO:
 # Evaluar si el tabaquismo actúa como variable de
 # confusión en la asociación entre obesidad y mortalidad.
 
 
-# =========================================================
-# 1. LIBRERÍAS
-# =========================================================
+
+ 1. LIBRERÍAS
+
 
 library(readxl)
 
 
-# =========================================================
-# 2. IMPORTAR BASE DE DATOS
-# =========================================================
+ 2. IMPORTAR BASE DE DATOS
+
 
 BD_confusion <- read_excel("datos/BD_confusion.xlsx")
 
-# Visualizar estructura
+ Visualizar estructura
 str(BD_confusion)
 
-# Visualizar primeras filas
+ Visualizar primeras filas
 head(BD_confusion)
 
 
-# =========================================================
-# 3. OR CRUDO
-# RELACIÓN ENTRE OBESIDAD Y MORTALIDAD
-# =========================================================
+ 3. OR CRUDO
+ RELACIÓN ENTRE OBESIDAD Y MORTALIDAD
+
 
 tabla_obesidad <- table(
   BD_confusion$obesidad,
@@ -55,18 +53,18 @@ OR_crudo <- (a*d)/(b*c)
 OR_crudo
 
 
-# =========================================================
-# 4. EVALUAR POSIBLE CONFUSIÓN
-# =========================================================
+
+ 4. EVALUAR POSIBLE CONFUSIÓN
+
 
 # El tabaquismo debe asociarse con:
 # 1. obesidad
 # 2. mortalidad
 
 
-# =========================================================
-# 5. TABAQUISMO Y OBESIDAD
-# =========================================================
+
+ 5. TABAQUISMO Y OBESIDAD
+
 
 tabla_tabaco_obesidad <- table(
   BD_confusion$tabaquismo,
@@ -87,9 +85,9 @@ OR_tabaco_obesidad <- (a*d)/(b*c)
 OR_tabaco_obesidad
 
 
-# =========================================================
-# 6. TABAQUISMO Y MORTALIDAD
-# =========================================================
+
+ 6. TABAQUISMO Y MORTALIDAD
+
 
 tabla_tabaco_muerte <- table(
   BD_confusion$tabaquismo,
@@ -110,9 +108,9 @@ OR_tabaco_muerte <- (a*d)/(b*c)
 OR_tabaco_muerte
 
 
-# =========================================================
-# 7. ESTRATIFICACIÓN
-# =========================================================
+
+ 7. ESTRATIFICACIÓN
+
 
 # Separar fumadores y no fumadores
 
@@ -125,9 +123,8 @@ no_fumadores <- BD_confusion[
 ]
 
 
-# =========================================================
-# 8. OR EN FUMADORES
-# =========================================================
+ 8. OR EN FUMADORES
+
 
 tabla_fumadores <- table(
   fumadores$obesidad,
@@ -148,9 +145,8 @@ OR_fumadores <- (a1*d1)/(b1*c1)
 OR_fumadores
 
 
-# =========================================================
-# 9. OR EN NO FUMADORES
-# =========================================================
+ 9. OR EN NO FUMADORES
+
 
 tabla_no_fumadores <- table(
   no_fumadores$obesidad,
@@ -171,9 +167,8 @@ OR_no_fumadores <- (a0*d0)/(b0*c0)
 OR_no_fumadores
 
 
-# =========================================================
-# 10. COMPARACIÓN FINAL
-# =========================================================
+ 10. COMPARACIÓN FINAL
+
 
 OR_crudo
 OR_fumadores
